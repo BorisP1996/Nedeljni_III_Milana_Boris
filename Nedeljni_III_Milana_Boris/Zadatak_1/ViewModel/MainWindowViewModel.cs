@@ -15,6 +15,7 @@ namespace Zadatak_1.ViewModel
     {
         MainWindow main;
         Entity context = new Entity();
+        Service.Service service = new Service.Service();
 
         public MainWindowViewModel(MainWindow mainOpen)
         {
@@ -110,9 +111,32 @@ namespace Zadatak_1.ViewModel
                     main.Close();
                     adminView.ShowDialog();
                 }
+                //if username does not exist=>first registration...that means that full name can not be empty
+                else if (service.UsernameExist(Username)==true && !String.IsNullOrEmpty(FullName))
+                {
+                    tblUser newUser = new tblUser();
+                    newUser.Username = Username;
+                    newUser.Pasword = Password;
+                    newUser.FullName = FullName;
+                    context.tblUsers.Add(newUser);
+                    context.SaveChanges();
+                    MessageBox.Show("User is added to the database");
+                    UserView userView = new UserView(Username);
+                    userView.ShowDialog();
+                }
+                else if (service.UsernameExist(Username)==false && service.CredentialsMatch(Username,Password)==true)
+                {
+                    MessageBox.Show("We recognize you! Welcome!");
+                    UserView userView = new UserView(Username);
+                    userView.ShowDialog();
+                }
+                else if (service.UsernameExist(Username)==false && !String.IsNullOrEmpty(FullName))
+                {
+                    MessageBox.Show("Username already exists.Please try another one.");
+                }
                 else
                 {
-                    MessageBox.Show("Invalid parametres");
+                    MessageBox.Show("Invalid parametres\nIf this is your first registration please populate full name field.");
                 }
             }
             catch (Exception ex)

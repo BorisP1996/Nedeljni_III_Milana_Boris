@@ -11,44 +11,47 @@ using Zadatak_1.View;
 
 namespace Zadatak_1.ViewModel
 {
-    class AdminViewModel: ViewModelBase
+    class UserViewModel : ViewModelBase
     {
-       AdminView adminView;
-       Service.Service service = new Service.Service();
+        UserView userView;
+        Entity context = new Entity();
+        Service.Service service = new Service.Service();
 
-        public AdminViewModel(AdminView adminView)
+        public UserViewModel(UserView userOpen,string username)
         {
-            this.adminView = adminView;
-            ReceptList = service.GetAllReceptView();
+            userView = userOpen;
+            Username = username;
+            ReceptList = GetUserRecepts();
 
         }
 
+        private string username;
+
+        public string Username
+        {
+            get { return username; }
+            set { username = value; }
+        }
 
         private vwRecept recept;
+
         public vwRecept Recept
         {
-            get
-            {
-                return recept;
-            }
-            set
-            {
-                recept = value;
+            get { return recept; }
+            set { recept = value;
                 OnPropertyChanged("Recept");
             }
         }
-       
+
         private List<vwRecept> receptList;
+
         public List<vwRecept> ReceptList
         {
             get { return receptList; }
-            set
-            {
-                receptList = value;
+            set { receptList = value;
                 OnPropertyChanged("ReceptList");
             }
         }
-
 
         private ICommand addRecept;
         /// <summary>
@@ -73,20 +76,18 @@ namespace Zadatak_1.ViewModel
         {
             try
             {
-                AddReceptView addReceptView = new AddReceptView("Admin");
+                AddReceptView addReceptView = new AddReceptView(Username);
                 addReceptView.ShowDialog();
                 if ((addReceptView.DataContext as AddReceptViewModel).IsUpdateRecept == true)
                 {
                     ReceptList = service.GetAllReceptView().ToList();
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.ToString());
             }
         }
-
         /// <summary>
         /// Can add recept
         /// </summary>
@@ -96,42 +97,62 @@ namespace Zadatak_1.ViewModel
             return true;
         }
 
-
-
-        private ICommand editRecept;
-
-        public ICommand EditRecept
+        private ICommand close;
+        public ICommand Close
         {
             get
             {
-                if (editRecept == null)
+                if (close==null)
                 {
-                    editRecept = new RelayCommand(param => EditReceptExecute(), param => CanEditReceptExecute());
+                    close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
                 }
-                return editRecept;
+                return close;
             }
         }
 
-
-        public bool CanEditReceptExecute()
+        private bool CanCloseExecute()
         {
             return true;
         }
 
-        public void EditReceptExecute()
+        private void CloseExecute()
+        {
+            userView.Close();
+        }
+
+        public List<vwRecept> GetUserRecepts()
         {
             try
             {
-                EditReceptView editReceptView = new EditReceptView(Recept);
-                editReceptView.ShowDialog();
-                ReceptList = service.GetAllReceptView();
+                using (Entity context = new Entity())
+                {
+                    List<vwRecept> receptList = context.vwRecepts.ToList();
+                    List<vwRecept> userRecept = new List<vwRecept>();
+                    List<tblRecept> allRecepts = new List<tblRecept>();
+
+                    tblUser viaUser = (from r in context.tblUsers where r.Username == Username select r).FirstOrDefault();
+                    int id = viaUser.UserId;
+
+                    foreach (vwRecept item in receptList)
+                    {
+                        if (item.UserID == id)
+                        {
+                            userRecept.Add(item);
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                    return userRecept;
+                }
             }
             catch (Exception ex)
             {
+
                 MessageBox.Show(ex.ToString());
+                return null;
             }
         }
     }
 }
-
-   

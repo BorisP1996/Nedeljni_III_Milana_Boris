@@ -95,9 +95,9 @@
     <Compile Include="Service\Service.cs" />
     <Compile Include="ViewModel\AddReceptViewModel.cs" />
     <Compile Include="ViewModel\AdminViewModel.cs" />
-    <Compile Include="ViewModel\CreateReceptViewModel.cs" />
     <Compile Include="ViewModel\EditReceptViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\AddReceptView.xaml.cs">
       <DependentUpon>AddReceptView.xaml</DependentUpon>
@@ -105,11 +105,11 @@
     <Compile Include="View\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CreateRecept.xaml.cs">
-      <DependentUpon>CreateRecept.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\EditReceptView.xaml.cs">
       <DependentUpon>EditReceptView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserView.xaml.cs">
+      <DependentUpon>UserView.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -132,11 +132,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CreateRecept.xaml">
+    <Page Include="View\EditReceptView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditReceptView.xaml">
+    <Page Include="View\UserView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
