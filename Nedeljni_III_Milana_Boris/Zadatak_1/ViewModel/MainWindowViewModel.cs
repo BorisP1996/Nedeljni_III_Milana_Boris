@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Input;
 using Zadatak_1.Command;
 using Zadatak_1.Model;
+using Zadatak_1.View;
 
 namespace Zadatak_1.ViewModel
 {
@@ -105,7 +106,9 @@ namespace Zadatak_1.ViewModel
             {
                 if (Username == "Admin" && Password == "Admin123")
                 {
-                    MessageBox.Show("Welcome admin");
+                    AdminView adminView = new AdminView();
+                    main.Close();
+                    adminView.ShowDialog();
                 }
                 else
                 {

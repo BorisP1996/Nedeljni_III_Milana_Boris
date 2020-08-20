@@ -5,8 +5,58 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadatak_1.View"
         mc:Ignorable="d"
-        Title="AdminView" Height="450" Width="800">
-    <Grid>
-        
+        Title="AdminView" Height="450" Width="1200">
+    <Grid Margin="0,0,-6.4,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Add recept" Command="{Binding AddRecept}"
+                HorizontalAlignment="Left" Margin="0.2,1,0,0.2" Width="65" Grid.RowSpan="2" Grid.Column="1"/>
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <DataGrid ItemsSource="{Binding ReceptList,UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Recept, UpdateSourceTrigger=PropertyChanged}"
+                IsReadOnly="True" HeadersVisibility="Column"  AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Recept ID" Binding="{Binding ReceptID}"/>
+                    <DataGridTextColumn Header="Recept name" Binding="{Binding ReceptName}"/>
+                    <DataGridTextColumn Header="Recept type" Binding="{Binding ReceptType}"/>
+                    <DataGridTextColumn Header="PersonNumber" Binding="{Binding PersonNumber}"/>
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
+                    <DataGridTextColumn Header="ReceptText" Binding="{Binding ReceptText}"/>
+                    <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate}"/>
+                    <DataGridTextColumn Header="ComponentName" Binding="{Binding ComponentName}"/>
+                    <DataGridTextColumn Header="ComponentAmount" Binding="{Binding ComponentAmount}"/>
+                    
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.EditRecept}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteRecept}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>
