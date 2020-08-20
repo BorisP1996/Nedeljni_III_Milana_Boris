@@ -1,0 +1,303 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Nedeljni_III_Arnautovic_Prpos_DDLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblComponents">
+          <Key>
+            <PropertyRef Name="ComponentID" />
+          </Key>
+          <Property Name="ComponentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReceptID" Type="int" Nullable="false" />
+          <Property Name="ComponentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComponentAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblRecept">
+          <Key>
+            <PropertyRef Name="ReceptID" />
+          </Key>
+          <Property Name="ReceptID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ReceptName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReceptType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonNumber" Type="int" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReceptText" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pasword" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Nedeljni_III_Arnautovic_Prpos_DDL.dbo.vwRecept' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vwRecept">
+          <Key>
+            <PropertyRef Name="ReceptID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ReceptName" />
+            <PropertyRef Name="ReceptType" />
+            <PropertyRef Name="PersonNumber" />
+            <PropertyRef Name="Author" />
+            <PropertyRef Name="ReceptText" />
+            <PropertyRef Name="CreationDate" />
+            <PropertyRef Name="ComponentAmount" />
+            <PropertyRef Name="ComponentName" />
+            <PropertyRef Name="ComponentID" />
+          </Key>
+          <Property Name="ReceptID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ReceptName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReceptType" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="PersonNumber" Type="int" Nullable="false" />
+          <Property Name="Author" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ReceptText" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreationDate" Type="date" Nullable="false" />
+          <Property Name="ComponentAmount" Type="int" Nullable="false" />
+          <Property Name="ComponentName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ComponentID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblCompon__Recep__1F98B2C1">
+          <End Role="tblRecept" Type="Self.tblRecept" Multiplicity="1" />
+          <End Role="tblComponents" Type="Self.tblComponents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRecept">
+              <PropertyRef Name="ReceptID" />
+            </Principal>
+            <Dependent Role="tblComponents">
+              <PropertyRef Name="ReceptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRecept__UserI__1EA48E88">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRecept" Type="Self.tblRecept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRecept">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Nedeljni_III_Arnautovic_Prpos_DDLModelStoreContainer">
+          <EntitySet Name="tblComponents" EntityType="Self.tblComponents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRecept" EntityType="Self.tblRecept" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUser" EntityType="Self.tblUser" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vwRecept" EntityType="Self.vwRecept" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vwRecept].[ReceptID] AS [ReceptID], 
+    [vwRecept].[UserID] AS [UserID], 
+    [vwRecept].[ReceptName] AS [ReceptName], 
+    [vwRecept].[ReceptType] AS [ReceptType], 
+    [vwRecept].[PersonNumber] AS [PersonNumber], 
+    [vwRecept].[Author] AS [Author], 
+    [vwRecept].[ReceptText] AS [ReceptText], 
+    [vwRecept].[CreationDate] AS [CreationDate], 
+    [vwRecept].[ComponentAmount] AS [ComponentAmount], 
+    [vwRecept].[ComponentName] AS [ComponentName], 
+    [vwRecept].[ComponentID] AS [ComponentID]
+    FROM [dbo].[vwRecept] AS [vwRecept]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__tblCompon__Recep__1F98B2C1" Association="Self.FK__tblCompon__Recep__1F98B2C1">
+            <End Role="tblRecept" EntitySet="tblRecept" />
+            <End Role="tblComponents" EntitySet="tblComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRecept__UserI__1EA48E88" Association="Self.FK__tblRecept__UserI__1EA48E88">
+            <End Role="tblUser" EntitySet="tblUser" />
+            <End Role="tblRecept" EntitySet="tblRecept" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Nedeljni_III_Arnautovic_Prpos_DDLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblComponent">
+          <Key>
+            <PropertyRef Name="ComponentID" />
+          </Key>
+          <Property Name="ComponentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReceptID" Type="Int32" Nullable="false" />
+          <Property Name="ComponentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="tblRecept" Relationship="Self.FK__tblCompon__Recep__1F98B2C1" FromRole="tblComponents" ToRole="tblRecept" />
+        </EntityType>
+        <EntityType Name="tblRecept">
+          <Key>
+            <PropertyRef Name="ReceptID" />
+          </Key>
+          <Property Name="ReceptID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ReceptName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceptType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonNumber" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceptText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="tblComponents" Relationship="Self.FK__tblCompon__Recep__1F98B2C1" FromRole="tblRecept" ToRole="tblComponents" />
+          <NavigationProperty Name="tblUser" Relationship="Self.FK__tblRecept__UserI__1EA48E88" FromRole="tblRecept" ToRole="tblUser" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Pasword" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblRecepts" Relationship="Self.FK__tblRecept__UserI__1EA48E88" FromRole="tblUser" ToRole="tblRecept" />
+        </EntityType>
+        <EntityType Name="vwRecept">
+          <Key>
+            <PropertyRef Name="ReceptID" />
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="ReceptName" />
+            <PropertyRef Name="ReceptType" />
+            <PropertyRef Name="PersonNumber" />
+            <PropertyRef Name="Author" />
+            <PropertyRef Name="ReceptText" />
+            <PropertyRef Name="CreationDate" />
+            <PropertyRef Name="ComponentAmount" />
+            <PropertyRef Name="ComponentName" />
+            <PropertyRef Name="ComponentID" />
+          </Key>
+          <Property Name="ReceptID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ReceptName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceptType" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PersonNumber" Type="Int32" Nullable="false" />
+          <Property Name="Author" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ReceptText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ComponentAmount" Type="Int32" Nullable="false" />
+          <Property Name="ComponentName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ComponentID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__tblCompon__Recep__1F98B2C1">
+          <End Role="tblRecept" Type="Self.tblRecept" Multiplicity="1" />
+          <End Role="tblComponents" Type="Self.tblComponent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblRecept">
+              <PropertyRef Name="ReceptID" />
+            </Principal>
+            <Dependent Role="tblComponents">
+              <PropertyRef Name="ReceptID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRecept__UserI__1EA48E88">
+          <End Role="tblUser" Type="Self.tblUser" Multiplicity="1" />
+          <End Role="tblRecept" Type="Self.tblRecept" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblUser">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="tblRecept">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblComponents" EntityType="Self.tblComponent" />
+          <EntitySet Name="tblRecepts" EntityType="Self.tblRecept" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <EntitySet Name="vwRecepts" EntityType="Self.vwRecept" />
+          <AssociationSet Name="FK__tblCompon__Recep__1F98B2C1" Association="Self.FK__tblCompon__Recep__1F98B2C1">
+            <End Role="tblRecept" EntitySet="tblRecepts" />
+            <End Role="tblComponents" EntitySet="tblComponents" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRecept__UserI__1EA48E88" Association="Self.FK__tblRecept__UserI__1EA48E88">
+            <End Role="tblUser" EntitySet="tblUsers" />
+            <End Role="tblRecept" EntitySet="tblRecepts" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Nedeljni_III_Arnautovic_Prpos_DDLModelStoreContainer" CdmEntityContainer="Entity">
+          <EntitySetMapping Name="tblComponents">
+            <EntityTypeMapping TypeName="Nedeljni_III_Arnautovic_Prpos_DDLModel.tblComponent">
+              <MappingFragment StoreEntitySet="tblComponents">
+                <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+                <ScalarProperty Name="ReceptID" ColumnName="ReceptID" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="ComponentAmount" ColumnName="ComponentAmount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRecepts">
+            <EntityTypeMapping TypeName="Nedeljni_III_Arnautovic_Prpos_DDLModel.tblRecept">
+              <MappingFragment StoreEntitySet="tblRecept">
+                <ScalarProperty Name="ReceptID" ColumnName="ReceptID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReceptName" ColumnName="ReceptName" />
+                <ScalarProperty Name="ReceptType" ColumnName="ReceptType" />
+                <ScalarProperty Name="PersonNumber" ColumnName="PersonNumber" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="ReceptText" ColumnName="ReceptText" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="Nedeljni_III_Arnautovic_Prpos_DDLModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUser">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Pasword" ColumnName="Pasword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vwRecepts">
+            <EntityTypeMapping TypeName="Nedeljni_III_Arnautovic_Prpos_DDLModel.vwRecept">
+              <MappingFragment StoreEntitySet="vwRecept">
+                <ScalarProperty Name="ReceptID" ColumnName="ReceptID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReceptName" ColumnName="ReceptName" />
+                <ScalarProperty Name="ReceptType" ColumnName="ReceptType" />
+                <ScalarProperty Name="PersonNumber" ColumnName="PersonNumber" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="ReceptText" ColumnName="ReceptText" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="ComponentAmount" ColumnName="ComponentAmount" />
+                <ScalarProperty Name="ComponentName" ColumnName="ComponentName" />
+                <ScalarProperty Name="ComponentID" ColumnName="ComponentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
