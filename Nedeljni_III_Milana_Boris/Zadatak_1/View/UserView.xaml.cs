@@ -11,17 +11,19 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
 {
     /// <summary>
-    /// Interaction logic for CreateRecept.xaml
+    /// Interaction logic for UserView.xaml
     /// </summary>
-    public partial class CreateRecept : Window
+    public partial class UserView : Window
     {
-        public CreateRecept()
+        public UserView(string username)
         {
             InitializeComponent();
+            this.DataContext = new UserViewModel(this,username);
         }
     }
 }

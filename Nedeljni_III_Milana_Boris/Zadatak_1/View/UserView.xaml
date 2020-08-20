@@ -1,0 +1,64 @@
+﻿<Window x:Class="Zadatak_1.View.UserView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.View"
+        mc:Ignorable="d"
+        Title="UserView" Height="494.118" Width="932.353">
+    <Grid Margin="0,0,26,14">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="6"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="Add recept" Command="{Binding AddRecept}"
+                HorizontalAlignment="Left" Margin="433,280,0,-281" Width="65" Grid.Column="1" Grid.Row="4"/>
+
+        <Grid Grid.Column="1" Grid.Row="3">
+            <DataGrid ItemsSource="{Binding ReceptList,UpdateSourceTrigger=PropertyChanged}"
+                SelectedItem="{Binding Recept, UpdateSourceTrigger=PropertyChanged}"
+                IsReadOnly="True" HeadersVisibility="Column"  AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Recept ID" Binding="{Binding ReceptID}"/>
+                    <DataGridTextColumn Header="Recept name" Binding="{Binding ReceptName}"/>
+                    <DataGridTextColumn Header="Recept type" Binding="{Binding ReceptType}"/>
+                    <DataGridTextColumn Header="PersonNumber" Binding="{Binding PersonNumber}"/>
+                    <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
+                    <DataGridTextColumn Header="ReceptText" Binding="{Binding ReceptText}"/>
+                    <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate}"/>
+                    <DataGridTextColumn Header="ComponentName" Binding="{Binding ComponentName}"/>
+                    <DataGridTextColumn Header="ComponentAmount" Binding="{Binding ComponentAmount}"/>
+
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Edit" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.EditRecept}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}, Path=DataContext.DeleteRecept}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <Button Content="Close" Command="{Binding Close}"
+            HorizontalAlignment="Left" Margin="260,280,0,-281" Width="65" Grid.Column="1" Grid.Row="4"/>
+    </Grid>
+</Window>
