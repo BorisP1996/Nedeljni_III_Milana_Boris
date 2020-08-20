@@ -11,20 +11,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
 {
     /// <summary>
-    /// Interaction logic for AdminView.xaml
+    /// Interaction logic for AddReceptView.xaml
     /// </summary>
-    public partial class AdminView : Window
+    public partial class AddReceptView : Window
     {
-        public AdminView()
+        public AddReceptView()
         {
             InitializeComponent();
-            this.DataContext = new AdminViewModel(this);
-
         }
     }
 }
