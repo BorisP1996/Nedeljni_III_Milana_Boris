@@ -104,11 +104,11 @@ namespace Zadatak_1.Service
                 {
                     tblComponent com = new tblComponent
                     {
-                        ReceptID=recept.ReceptID,
+                        ReceptID = recept.ReceptID,
                         ComponentName = recept.ComponentName,
                         ComponentAmount = recept.ComponentAmount,
-                        
-                        
+
+
                     };
                     context.tblComponents.Add(com);
                     context.SaveChanges();
@@ -169,7 +169,7 @@ namespace Zadatak_1.Service
             }
         }
 
-        public bool CredentialsMatch(string inputUsername,string inputPassword)
+        public bool CredentialsMatch(string inputUsername, string inputPassword)
         {
             try
             {
@@ -179,7 +179,7 @@ namespace Zadatak_1.Service
 
                     foreach (tblUser item in userList)
                     {
-                        if (item.Username==inputUsername && item.Pasword==inputPassword)
+                        if (item.Username == inputUsername && item.Pasword == inputPassword)
                         {
                             return true;
                         }
@@ -199,8 +199,39 @@ namespace Zadatak_1.Service
                 return false;
             }
         }
+        public bool EditRecept(vwRecept recept)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
 
-        public void DeleteRecept(vwRecept recept)
+                    tblRecept receptToEdit = context.tblRecepts.Where(x => x.ReceptID == recept.ReceptID).FirstOrDefault();
+                    receptToEdit.ReceptName = recept.ReceptName;
+                    receptToEdit.ReceptType = recept.ReceptType;
+                    receptToEdit.PersonNumber = recept.PersonNumber;
+                    receptToEdit.Author =recept.Author;
+                    receptToEdit.ReceptText = recept.ReceptText;
+                    receptToEdit.CreationDate = DateTime.Now;
+                    context.SaveChanges();
+                    tblComponent componentToEdit = context.tblComponents.Where(x => x.ComponentID == recept.ComponentID).FirstOrDefault();
+                    componentToEdit.ComponentName = recept.ComponentName;
+                    componentToEdit.ComponentAmount = recept.ComponentAmount;
+                    
+                    context.SaveChanges();
+                    return true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine("Exception" + ex.Message.ToString());
+                return false;
+            }
+        }
+      
+      public void DeleteRecept(vwRecept recept)
         {
             try
             {
@@ -236,7 +267,7 @@ namespace Zadatak_1.Service
             }
         }
 
-        
-
     }
 }
+           
+   

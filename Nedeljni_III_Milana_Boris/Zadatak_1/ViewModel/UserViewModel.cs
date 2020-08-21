@@ -155,6 +155,7 @@ namespace Zadatak_1.ViewModel
             }
         }
 
+
         private ICommand deleteRecept;
         public ICommand DeleteRecept
         {
@@ -200,8 +201,44 @@ namespace Zadatak_1.ViewModel
             {
 
                 MessageBox.Show(ex.ToString());
-                
+               
+       
+    }
+}
+
+ private ICommand editRecept;
+
+        public ICommand EditRecept
+        {
+            get
+            {
+                if (editRecept == null)
+                {
+                    editRecept = new RelayCommand(param => EditReceptExecute(), param => CanEditReceptExecute());
+                }
+                return editRecept;
             }
         }
-    }
+
+
+        public bool CanEditReceptExecute()
+        {
+            return true;
+        }
+
+        public void EditReceptExecute()
+        {
+            try
+            {
+                EditReceptView editReceptView = new EditReceptView(Recept);
+                editReceptView.ShowDialog();
+                ReceptList = service.GetAllReceptView();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+
+            }
+        }
+}
 }
