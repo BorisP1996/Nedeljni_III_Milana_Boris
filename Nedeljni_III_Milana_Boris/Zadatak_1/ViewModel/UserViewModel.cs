@@ -232,7 +232,7 @@ namespace Zadatak_1.ViewModel
             {
                 EditReceptView editReceptView = new EditReceptView(Recept);
                 editReceptView.ShowDialog();
-                ReceptList = service.GetAllReceptView();
+                ReceptList = GetUserRecepts();
             }
             catch (Exception ex)
             {

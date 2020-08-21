@@ -42,6 +42,7 @@
         <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,27,0,0" Width="54"/>
         <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,72,0,0" Width="54"/>
         <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,124,0,0" Width="54"/>
+        <Label Content="*All fields must be populated" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="282,319,0,0" Width="164" FontSize="10"/>
 
     </Grid>
 </Window>
