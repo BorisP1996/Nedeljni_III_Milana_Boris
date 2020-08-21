@@ -7,6 +7,41 @@
         mc:Ignorable="d"
         Title="EditReceptView" Height="450" Width="800">
     <Grid>
-        
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.ReceptName,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,30,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.PersonNumber,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,76,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.ReceptText,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,128,0,0"/>
+        <Label Content="Recept name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,26,0,0" Width="86"/>
+        <Label Content="Number of persons" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,72,0,0" Width="115" PreviewTextInput="NumbersOnlyTextBox"/>
+        <Label Content="Recept description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,124,0,0" Width="115"/>
+        <Label Content="Recept description" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,174,0,0" Width="115"/>
+        <ComboBox HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="130,174,0,0"
+                   DisplayMemberPath="Name"
+                  SelectedValuePath="Name"
+                  ItemsSource="{Binding TypeList,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding ReceptType,UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Component1.ComponentName,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="433,30,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Component1.ComponentAmount,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="64" Margin="697,30,0,0" PreviewTextInput="NumbersOnlyTextBox"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Component2.ComponentName,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="433,76,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Component2.ComponentAmount,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="64" Margin="697,76,0,0" PreviewTextInput="NumbersOnlyTextBox" RenderTransformOrigin="0.5,0.5">
+            <TextBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform AngleY="0.373"/>
+                    <RotateTransform/>
+                    <TranslateTransform Y="0.007"/>
+                </TransformGroup>
+            </TextBox.RenderTransform>
+        </TextBox>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Component3.ComponentName,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="433,128,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Component3.ComponentAmount,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="64" Margin="697,128,0,0" PreviewTextInput="NumbersOnlyTextBox"/>
+        <Button Content="Save" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="282,363,0,0" Command="{Binding Save,UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Close" HorizontalAlignment="Left" VerticalAlignment="Top" Width="82" Margin="405,363,0,0" Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
+        <Label Content="Component 1" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="334,27,0,0" Width="83"/>
+        <Label Content="Component 2" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="334,72,0,0" Width="83"/>
+        <Label Content="Component 3" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="334,125,0,0" Width="83"/>
+        <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,27,0,0" Width="54"/>
+        <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,72,0,0" Width="54"/>
+        <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,124,0,0" Width="54"/>
+
     </Grid>
 </Window>

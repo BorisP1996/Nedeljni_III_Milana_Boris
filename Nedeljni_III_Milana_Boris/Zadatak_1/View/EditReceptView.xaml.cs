@@ -21,10 +21,10 @@ namespace Zadatak_1.View
     /// </summary>
     public partial class EditReceptView : Window
     {
-        public EditReceptView(vwRecept receptToEdit)
+        public EditReceptView(vwRecept recept)
         {
             InitializeComponent();
-           // this.DataContext = new EditReceptViewModel(this, receptToEdit);
+           this.DataContext = new EditReceptViewModel(this, recept);
         }
     }
 }
