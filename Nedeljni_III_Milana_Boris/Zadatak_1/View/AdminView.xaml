@@ -34,10 +34,10 @@
                     <DataGridTextColumn Header="PersonNumber" Binding="{Binding PersonNumber}"/>
                     <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
                     <DataGridTextColumn Header="ReceptText" Binding="{Binding ReceptText}"/>
-                    <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate}"/>
+                    <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate,StringFormat=\{0:dd.MM.yyyy \}}"/>
                     <DataGridTextColumn Header="ComponentName" Binding="{Binding ComponentName}"/>
                     <DataGridTextColumn Header="ComponentAmount" Binding="{Binding ComponentAmount}"/>
-                    
+
 
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
@@ -58,5 +58,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
+        <Button Content="Close" Command="{Binding Close}"
+            HorizontalAlignment="Left" Margin="88,1,0,0" Width="65" Grid.RowSpan="2" Grid.Column="1"/>
     </Grid>
 </Window>

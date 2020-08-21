@@ -220,14 +220,53 @@ namespace Zadatak_1.Service
                     
                     context.SaveChanges();
                     return true;
+
                 }
             }
             catch (Exception ex)
             {
+
                 Debug.WriteLine("Exception" + ex.Message.ToString());
                 return false;
             }
         }
+      
+      public void DeleteRecept(vwRecept recept)
+        {
+            try
+            {
+                using (Entity context = new Entity())
+                {
+                    tblRecept viaRecept = (from r in context.tblRecepts where r.ReceptID == recept.ReceptID select r).FirstOrDefault();
+
+                    //find every component for this recept
+
+                    List<tblComponent> componentList = context.tblComponents.ToList();
+
+                    foreach (tblComponent item in componentList)
+                    {
+                        if (item.ReceptID==viaRecept.ReceptID)
+                        {
+                            context.tblComponents.Remove(item);
+                            context.SaveChanges();
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+
+                    context.tblRecepts.Remove(viaRecept);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
     }
 }
            

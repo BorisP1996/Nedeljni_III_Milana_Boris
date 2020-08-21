@@ -131,6 +131,75 @@ namespace Zadatak_1.ViewModel
                 MessageBox.Show(ex.ToString());
             }
         }
+        private ICommand close;
+        public ICommand Close
+        {
+            get
+            {
+                if (close == null)
+                {
+                    close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
+                }
+                return close;
+            }
+        }
+
+        private bool CanCloseExecute()
+        {
+            return true;
+        }
+
+        private void CloseExecute()
+        {
+            adminView.Close();
+        }
+
+        private ICommand deleteRecept;
+        public ICommand DeleteRecept
+        {
+            get
+            {
+                if (deleteRecept == null)
+                {
+                    deleteRecept = new RelayCommand(param => DeleteReceptExecute(), param => CanDeleteReceptExecute());
+                }
+                return deleteRecept;
+            }
+        }
+        private bool CanDeleteReceptExecute()
+        {
+            if (Recept != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void DeleteReceptExecute()
+        {
+            try
+            {
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                MessageBoxResult resultMessageBox = MessageBox.Show("Are you sure you want to delete recept?", "Warning", btnMessageBox, icnMessageBox);
+
+                if (resultMessageBox == MessageBoxResult.Yes)
+                {
+                    service.DeleteRecept(Recept);
+                    MessageBox.Show("Recept is deleted");
+                    ReceptList = service.GetAllReceptView();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+
+            }
+        }
     }
 }
 

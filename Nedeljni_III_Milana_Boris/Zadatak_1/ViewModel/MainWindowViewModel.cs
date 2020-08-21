@@ -108,8 +108,11 @@ namespace Zadatak_1.ViewModel
                 if (Username == "Admin" && Password == "Admin123")
                 {
                     AdminView adminView = new AdminView();
-                    main.Close();
-                    adminView.ShowDialog();
+                    //main.Close();
+                    adminView.Show();
+                    Username = "";
+                    Password = "";
+                    FullName = "";
                 }
                 //if username does not exist=>first registration...that means that full name can not be empty
                 else if (service.UsernameExist(Username)==true && !String.IsNullOrEmpty(FullName))
@@ -122,13 +125,19 @@ namespace Zadatak_1.ViewModel
                     context.SaveChanges();
                     MessageBox.Show("User is added to the database");
                     UserView userView = new UserView(Username);
-                    userView.ShowDialog();
+                    userView.Show();
+                    Username = "";
+                    Password = "";
+                    FullName = "";
                 }
                 else if (service.UsernameExist(Username)==false && service.CredentialsMatch(Username,Password)==true)
                 {
                     MessageBox.Show("We recognize you! Welcome!");
                     UserView userView = new UserView(Username);
-                    userView.ShowDialog();
+                    userView.Show();
+                    Username = "";
+                    Password = "";
+                    FullName = "";
                 }
                 else if (service.UsernameExist(Username)==false && !String.IsNullOrEmpty(FullName))
                 {
