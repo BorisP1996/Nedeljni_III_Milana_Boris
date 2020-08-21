@@ -80,7 +80,7 @@ namespace Zadatak_1.ViewModel
                 addReceptView.ShowDialog();
                 if ((addReceptView.DataContext as AddReceptViewModel).IsUpdateRecept == true)
                 {
-                    ReceptList = service.GetAllReceptView().ToList();
+                    ReceptList = GetUserRecepts();
                 }
             }
             catch (Exception ex)
@@ -152,6 +152,55 @@ namespace Zadatak_1.ViewModel
 
                 MessageBox.Show(ex.ToString());
                 return null;
+            }
+        }
+
+        private ICommand deleteRecept;
+        public ICommand DeleteRecept
+        {
+            get
+            {
+                if (deleteRecept==null)
+                {
+                    deleteRecept = new RelayCommand(param => DeleteReceptExecute(), param => CanDeleteReceptExecute());
+                }
+                return deleteRecept;
+            }
+        }
+
+        private bool CanDeleteReceptExecute()
+        {
+            if (Recept!=null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private void DeleteReceptExecute()
+        {
+            try
+            {
+                MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
+                MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
+
+                MessageBoxResult resultMessageBox = MessageBox.Show("Are you sure you want to delete recept?","Warning", btnMessageBox, icnMessageBox);
+
+                if (resultMessageBox == MessageBoxResult.Yes)
+                {
+                    service.DeleteRecept(Recept);
+                    MessageBox.Show("Recept is deleted");
+                    ReceptList = GetUserRecepts();
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+                
             }
         }
     }

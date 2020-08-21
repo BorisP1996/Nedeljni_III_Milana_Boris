@@ -26,6 +26,7 @@ namespace Zadatak_1.ViewModel
             Recept = new tblRecept();
             Username = username;
             TypeList = GetReceptType();
+            ReceptType = new ReceptType();
         }
         private string username;
 
@@ -191,7 +192,12 @@ namespace Zadatak_1.ViewModel
                 context.SaveChanges();
                 IsUpdateRecept = true;
 
-                MessageBox.Show("Recept is added");
+                MessageBox.Show("Recept is added\n\nDate of creation is set to today date\nAuthor of recept is logged user");
+                 Recept = new tblRecept();
+                 Component1 = new tblComponent();
+                 Component2 = new tblComponent();
+                 Component3 = new tblComponent();
+                ReceptType = new ReceptType();
 
             }
             catch (Exception ex)
@@ -202,7 +208,14 @@ namespace Zadatak_1.ViewModel
 
         private bool CanSaveExecute()
         {
-            return true;
+            if (String.IsNullOrEmpty(Recept.ReceptName) || String.IsNullOrEmpty(Recept.ReceptText) || String.IsNullOrEmpty(ReceptType.Name) || String.IsNullOrEmpty(Component1.ComponentName) || String.IsNullOrEmpty(Component2.ComponentName) || String.IsNullOrEmpty(Component3.ComponentName) || Recept.PersonNumber==0 || Component1.ComponentAmount==0 || Component2.ComponentAmount==0 || Component3.ComponentAmount==0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
         private List<ReceptType> GetReceptType()
@@ -224,6 +237,10 @@ namespace Zadatak_1.ViewModel
         
         public string Name { get; set; }
 
+        public ReceptType()
+        {
+
+        }
         public ReceptType( string n)
         {
             Name = n;

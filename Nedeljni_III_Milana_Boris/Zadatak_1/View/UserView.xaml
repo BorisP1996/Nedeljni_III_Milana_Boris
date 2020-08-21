@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Zadatak_1.View"
         mc:Ignorable="d"
-        Title="UserView" Height="494.118" Width="932.353">
-    <Grid Margin="0,0,26,14">
+        Title="UserView" Height="542.118" Width="1027.353">
+    <Grid Margin="0,0,-8,14">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="20"/>
             <ColumnDefinition Width="auto"/>
@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <Button Content="Add recept" Command="{Binding AddRecept}"
-                HorizontalAlignment="Left" Margin="433,280,0,-281" Width="65" Grid.Column="1" Grid.Row="4"/>
+                HorizontalAlignment="Left" Margin="29,2,0,5" Width="65" Grid.Column="1" Grid.RowSpan="3"/>
 
         <Grid Grid.Column="1" Grid.Row="3">
             <DataGrid ItemsSource="{Binding ReceptList,UpdateSourceTrigger=PropertyChanged}"
@@ -34,7 +34,7 @@
                     <DataGridTextColumn Header="PersonNumber" Binding="{Binding PersonNumber}"/>
                     <DataGridTextColumn Header="Author" Binding="{Binding Author}"/>
                     <DataGridTextColumn Header="ReceptText" Binding="{Binding ReceptText}"/>
-                    <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate}"/>
+                    <DataGridTextColumn Header="CreationDate" Binding="{Binding CreationDate, StringFormat=\{0:dd.MM.yyyy \}}"/>
                     <DataGridTextColumn Header="ComponentName" Binding="{Binding ComponentName}"/>
                     <DataGridTextColumn Header="ComponentAmount" Binding="{Binding ComponentAmount}"/>
 
@@ -59,6 +59,6 @@
             </DataGrid>
         </Grid>
         <Button Content="Close" Command="{Binding Close}"
-            HorizontalAlignment="Left" Margin="260,280,0,-281" Width="65" Grid.Column="1" Grid.Row="4"/>
+            HorizontalAlignment="Left" Margin="127,2,0,5" Width="64" Grid.Column="1" Grid.RowSpan="3"/>
     </Grid>
 </Window>
