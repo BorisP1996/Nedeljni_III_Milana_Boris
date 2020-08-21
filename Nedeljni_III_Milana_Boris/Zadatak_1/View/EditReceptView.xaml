@@ -8,7 +8,7 @@
         Title="EditReceptView" Height="450" Width="800">
     <Grid>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.ReceptName,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,30,0,0"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.PersonNumber,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,76,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.PersonNumber,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,76,0,0" PreviewTextInput="NumbersOnlyTextBox"/>
         <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="{Binding Recept.ReceptText,UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Top" Width="120" Margin="130,128,0,0"/>
         <Label Content="Recept name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="21,26,0,0" Width="86"/>
         <Label Content="Number of persons" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,72,0,0" Width="115" PreviewTextInput="NumbersOnlyTextBox"/>
@@ -42,6 +42,7 @@
         <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,27,0,0" Width="54"/>
         <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,72,0,0" Width="54"/>
         <Label Content="Amount" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="622,124,0,0" Width="54"/>
+        <Label Content="*All fields must be populated" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="282,318,0,0" Width="147" FontSize="10"/>
 
     </Grid>
 </Window>
