@@ -63,5 +63,12 @@
                Margin="400,155,0,0"
                Width="170"
                FontSize="10"/>
+
+        <Label Content="*Password must be at least 5 characters long"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               Margin="400,106,0,0"
+               Width="170"
+               FontSize="10"/>
     </Grid>
 </Window>

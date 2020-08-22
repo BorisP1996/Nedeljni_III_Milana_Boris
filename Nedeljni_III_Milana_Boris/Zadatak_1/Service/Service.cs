@@ -199,37 +199,7 @@ namespace Zadatak_1.Service
                 return false;
             }
         }
-        public bool EditRecept(vwRecept recept)
-        {
-            try
-            {
-                using (Entity context = new Entity())
-                {
-
-                    tblRecept receptToEdit = context.tblRecepts.Where(x => x.ReceptID == recept.ReceptID).FirstOrDefault();
-                    receptToEdit.ReceptName = recept.ReceptName;
-                    receptToEdit.ReceptType = recept.ReceptType;
-                    receptToEdit.PersonNumber = recept.PersonNumber;
-                    receptToEdit.Author =recept.Author;
-                    receptToEdit.ReceptText = recept.ReceptText;
-                    receptToEdit.CreationDate = DateTime.Now;
-                    context.SaveChanges();
-                    tblComponent componentToEdit = context.tblComponents.Where(x => x.ComponentID == recept.ComponentID).FirstOrDefault();
-                    componentToEdit.ComponentName = recept.ComponentName;
-                    componentToEdit.ComponentAmount = recept.ComponentAmount;
-                    
-                    context.SaveChanges();
-                    return true;
-
-                }
-            }
-            catch (Exception ex)
-            {
-
-                Debug.WriteLine("Exception" + ex.Message.ToString());
-                return false;
-            }
-        }
+      
       
       public void DeleteRecept(vwRecept recept)
         {

@@ -17,7 +17,7 @@ namespace Zadatak_1.ViewModel
         Entity context = new Entity();
         Service.Service service = new Service.Service();
 
-        public UserViewModel(UserView userOpen,string username)
+        public UserViewModel(UserView userOpen, string username)
         {
             userView = userOpen;
             Username = username;
@@ -38,7 +38,9 @@ namespace Zadatak_1.ViewModel
         public vwRecept Recept
         {
             get { return recept; }
-            set { recept = value;
+            set
+            {
+                recept = value;
                 OnPropertyChanged("Recept");
             }
         }
@@ -48,7 +50,9 @@ namespace Zadatak_1.ViewModel
         public List<vwRecept> ReceptList
         {
             get { return receptList; }
-            set { receptList = value;
+            set
+            {
+                receptList = value;
                 OnPropertyChanged("ReceptList");
             }
         }
@@ -102,7 +106,7 @@ namespace Zadatak_1.ViewModel
         {
             get
             {
-                if (close==null)
+                if (close == null)
                 {
                     close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
                 }
@@ -161,7 +165,7 @@ namespace Zadatak_1.ViewModel
         {
             get
             {
-                if (deleteRecept==null)
+                if (deleteRecept == null)
                 {
                     deleteRecept = new RelayCommand(param => DeleteReceptExecute(), param => CanDeleteReceptExecute());
                 }
@@ -171,7 +175,7 @@ namespace Zadatak_1.ViewModel
 
         private bool CanDeleteReceptExecute()
         {
-            if (Recept!=null)
+            if (Recept != null)
             {
                 return true;
             }
@@ -188,7 +192,7 @@ namespace Zadatak_1.ViewModel
                 MessageBoxButton btnMessageBox = MessageBoxButton.YesNo;
                 MessageBoxImage icnMessageBox = MessageBoxImage.Warning;
 
-                MessageBoxResult resultMessageBox = MessageBox.Show("Are you sure you want to delete recept?","Warning", btnMessageBox, icnMessageBox);
+                MessageBoxResult resultMessageBox = MessageBox.Show("Are you sure you want to delete recept?", "Warning", btnMessageBox, icnMessageBox);
 
                 if (resultMessageBox == MessageBoxResult.Yes)
                 {
@@ -201,12 +205,12 @@ namespace Zadatak_1.ViewModel
             {
 
                 MessageBox.Show(ex.ToString());
-               
-       
-    }
-}
 
- private ICommand editRecept;
+
+            }
+        }
+
+        private ICommand editRecept;
 
         public ICommand EditRecept
         {
@@ -240,5 +244,30 @@ namespace Zadatak_1.ViewModel
 
             }
         }
-}
+        private ICommand logOut;
+        public ICommand LogOut
+        {
+            get
+            {
+                if (logOut == null)
+                {
+                    logOut = new RelayCommand(param => LogoutExecute(), param => CanLogoutExecute());
+                }
+                return logOut;
+            }
+        }
+        public bool CanLogoutExecute()
+        {
+            return true;
+        }
+
+        public void LogoutExecute()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                userView.Close();
+            }
+        }
+    }
 }

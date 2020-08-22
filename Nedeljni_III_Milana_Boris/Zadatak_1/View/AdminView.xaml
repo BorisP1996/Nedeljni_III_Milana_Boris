@@ -21,7 +21,12 @@
         </Grid.RowDefinitions>
 
         <Button Content="Add recept" Command="{Binding AddRecept}"
-                HorizontalAlignment="Left" Margin="0.2,1,0,0.2" Width="65" Grid.RowSpan="2" Grid.Column="1"/>
+                HorizontalAlignment="Left" Margin="10.2,3,0,4.6" Width="65" Grid.RowSpan="3" Grid.Column="1"/>
+        <Button  Name="btnLogout" Content="Logout" Command="{Binding LogOut, UpdateSourceTrigger=PropertyChanged}" 
+                HorizontalAlignment="Left" Margin="190.2,4,0,3.4" Width="65" Grid.RowSpan="3" Grid.Column="1" RenderTransformOrigin="0.036,0.763"/>
+
+
+
 
         <Grid Grid.Column="1" Grid.Row="3">
             <DataGrid ItemsSource="{Binding ReceptList,UpdateSourceTrigger=PropertyChanged}"
@@ -59,6 +64,6 @@
             </DataGrid>
         </Grid>
         <Button Content="Close" Command="{Binding Close}"
-            HorizontalAlignment="Left" Margin="88,1,0,0" Width="65" Grid.RowSpan="2" Grid.Column="1"/>
+            HorizontalAlignment="Left" Margin="97.2,4,0,4.6" Width="65" Grid.RowSpan="3" Grid.Column="1"/>
     </Grid>
 </Window>

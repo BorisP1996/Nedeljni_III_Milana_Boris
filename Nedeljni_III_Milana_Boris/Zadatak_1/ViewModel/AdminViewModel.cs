@@ -200,6 +200,31 @@ namespace Zadatak_1.ViewModel
 
             }
         }
+        private ICommand logOut;
+        public ICommand LogOut
+        {
+            get
+            {
+                if (logOut == null)
+                {
+                    logOut = new RelayCommand(param => LogoutExecute(), param => CanLogoutExecute());
+                }
+                return logOut;
+            }
+        }
+        public bool CanLogoutExecute()
+        {
+            return true;
+        }
+
+        public void LogoutExecute()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                adminView.Close();
+            }
+        }
     }
 }
 
