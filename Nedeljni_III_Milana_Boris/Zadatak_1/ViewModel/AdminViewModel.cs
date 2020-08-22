@@ -131,28 +131,7 @@ namespace Zadatak_1.ViewModel
                 MessageBox.Show(ex.ToString());
             }
         }
-        private ICommand close;
-        public ICommand Close
-        {
-            get
-            {
-                if (close == null)
-                {
-                    close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
-                }
-                return close;
-            }
-        }
-
-        private bool CanCloseExecute()
-        {
-            return true;
-        }
-
-        private void CloseExecute()
-        {
-            adminView.Close();
-        }
+        
 
         private ICommand deleteRecept;
         public ICommand DeleteRecept

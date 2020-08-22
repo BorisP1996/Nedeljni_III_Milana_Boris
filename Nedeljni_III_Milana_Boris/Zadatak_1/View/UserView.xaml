@@ -58,8 +58,7 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Button Content="Close" Command="{Binding Close}"
-            HorizontalAlignment="Left" Margin="127,2,0,5" Width="64" Grid.Column="1" Grid.RowSpan="3"/>
+       
         <Button  Name="btnLogout" Content="Logout" Command="{Binding LogOut, UpdateSourceTrigger=PropertyChanged}" 
                 HorizontalAlignment="Left" Margin="236.2,2,0,4.8" Width="65" Grid.RowSpan="3" Grid.Column="1" RenderTransformOrigin="0.036,0.763"/>
 

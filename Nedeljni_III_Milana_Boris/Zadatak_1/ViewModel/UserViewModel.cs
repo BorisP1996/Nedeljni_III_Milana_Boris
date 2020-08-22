@@ -101,28 +101,7 @@ namespace Zadatak_1.ViewModel
             return true;
         }
 
-        private ICommand close;
-        public ICommand Close
-        {
-            get
-            {
-                if (close == null)
-                {
-                    close = new RelayCommand(param => CloseExecute(), param => CanCloseExecute());
-                }
-                return close;
-            }
-        }
-
-        private bool CanCloseExecute()
-        {
-            return true;
-        }
-
-        private void CloseExecute()
-        {
-            userView.Close();
-        }
+       
 
         public List<vwRecept> GetUserRecepts()
         {
