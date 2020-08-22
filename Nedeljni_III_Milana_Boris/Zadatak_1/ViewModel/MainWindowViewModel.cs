@@ -16,6 +16,7 @@ namespace Zadatak_1.ViewModel
         MainWindow main;
         Entity context = new Entity();
         Service.Service service = new Service.Service();
+       
 
         public MainWindowViewModel(MainWindow mainOpen)
         {
@@ -61,6 +62,20 @@ namespace Zadatak_1.ViewModel
                 OnPropertyChanged("FullName");
             }
         }
+        private tblUser user;
+        public tblUser User
+        {
+            get
+            {
+                return user;
+            }
+            set
+            {
+                user = value;
+                OnPropertyChanged("User");
+            }
+        }
+
 
         #endregion
 
@@ -115,7 +130,7 @@ namespace Zadatak_1.ViewModel
                     FullName = "";
                 }
                 //if username does not exist=>first registration...that means that full name can not be empty
-                else if (service.UsernameExist(Username)==true && !String.IsNullOrEmpty(FullName))
+                else if (service.UsernameExist(Username) == true && !String.IsNullOrEmpty(FullName))
                 {
                     tblUser newUser = new tblUser();
                     newUser.Username = Username;
@@ -130,8 +145,9 @@ namespace Zadatak_1.ViewModel
                     Password = "";
                     FullName = "";
                 }
-                else if (service.UsernameExist(Username)==false && service.CredentialsMatch(Username,Password)==true)
+                else if (service.UsernameExist(Username) == false && service.CredentialsMatch(Username, Password) == true)
                 {
+
                     MessageBox.Show("We recognize you! Welcome!");
                     UserView userView = new UserView(Username);
                     userView.Show();
@@ -139,10 +155,12 @@ namespace Zadatak_1.ViewModel
                     Password = "";
                     FullName = "";
                 }
-                else if (service.UsernameExist(Username)==false && !String.IsNullOrEmpty(FullName))
+                else if (service.UsernameExist(Username) == false && !String.IsNullOrEmpty(FullName))
                 {
                     MessageBox.Show("Username already exists.Please try another one.");
                 }
+
+
                 else
                 {
                     MessageBox.Show("Invalid parametres\nIf this is your first registration please populate full name field.");
@@ -157,11 +175,12 @@ namespace Zadatak_1.ViewModel
         }
         private bool CanLoginExecute()
         {
-            if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password))
+            if (String.IsNullOrEmpty(Username) || String.IsNullOrEmpty(Password)|| Password.Length<5)
             {
                 return false;
             }
-            else
+            
+            else 
             {
                 return true;
             }
