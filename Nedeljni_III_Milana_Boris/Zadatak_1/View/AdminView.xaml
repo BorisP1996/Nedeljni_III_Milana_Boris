@@ -63,7 +63,6 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <Button Content="Close" Command="{Binding Close}"
-            HorizontalAlignment="Left" Margin="97.2,4,0,4.6" Width="65" Grid.RowSpan="3" Grid.Column="1"/>
+       
     </Grid>
 </Window>
